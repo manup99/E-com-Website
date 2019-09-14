@@ -1,0 +1,25 @@
+{%extends "app/base.html"%}
+
+{%load crispy_forms_tags%}
+{%block content%}
+  <!--Main layout-->
+  <main class="pt-4">
+    <div class="container wow fadeIn">
+
+      <!-- Heading -->
+      <h2 class="my-5 h2 text-center">Payment Status</h2>
+        <h2 style="text-align:center;margin-top:30px;>Payment status regarding your order Id {{response.ORDERID}}</h2>
+        {% if response.RESPCODE == '01' %}
+        <h2 style="text-align:center;margin-top:30px;>Order Placed successfully!</h2>
+        {% else %}
+        <h2 style="text-align:center;my-2;">Order Failure!</h2>
+        {% endif%}
+        <h3 style="text-align:center;margin-top:60px;"><a href="{%url 'app:item_list'%}">Click here to go back to home page.</a></h3>
+
+
+
+    </div>
+  </main>
+  <!--Main layout-->
+
+{%endblock%}

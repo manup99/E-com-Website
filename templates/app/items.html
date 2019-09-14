@@ -1,0 +1,9 @@
+{%extends 'app/base.html'%}
+{%block content%}
+    <h1>Here is the list of items</h1>
+    {%for item in items%}
+        <!--<h1>{{item.title}}</h1>
+        <h2>{{item.price}}</h2>-->
+        <h1>{{item}}</h1>
+    {%endfor%}
+{%endblock%}

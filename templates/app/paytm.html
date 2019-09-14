@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Paytm Merchant payment page</title>
+</head>
+<body>
+<h1>Redirecting you to the Merchant...</h1>
+<h1>Please do not refresh the page...</h1>
+<form action="https://securegw.paytm.in/theia/processTransaction" method="post" name="paytm">
+    {%for item,item1 in param_dict.items%}
+    <input type="hidden" name="{{item}}" value="{{item1}}">
+    {%endfor%}
+
+</form>
+</body>
+<script>
+document.paytm.submit()
+</script>
+</html>

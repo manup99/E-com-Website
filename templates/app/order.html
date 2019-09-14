@@ -1,0 +1,89 @@
+{%extends "app/base.html"%}
+{%block content%}
+
+  <!--Main layout-->
+  <main>
+    <div class="container">
+
+      <!--Navbar-->
+      <!--/.Navbar-->
+
+      <!--Section: Products v.3-->
+      <section class="text-center mb-4">
+
+        <!--Grid row-->
+        <div class="row wow fadeIn">
+
+          <!--Grid column-->
+
+            <div class="table-responsive text-nowrap">
+        {%if message%}
+            <h2 style="margin-top:20px;">{{message}}</h2>
+        {%else%}
+        <h2 style="margin-top:20px;font-weight:bold">Order Summary</h2>
+  <table class="table my-3">
+    <thead>
+      <tr>
+          <th>#</th>
+        <th scope="col">Item Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Total Item Price</th>
+
+      </tr>
+    </thead>
+    <tbody>
+    {%for order_item in order.items.all%}
+      <tr>
+        <th scope="row">{{forloop.counter}}</th>
+        <td>{{order_item.item.title}}</td>
+        <td>{{order_item.item.price}}</td>
+        <td><a href="{%url "app:remove1" order_item.item.id%}"><i class="fas fa-minus"></i></a>&nbsp{{order_item.quantity}}&nbsp<a href="{%url "app:add1" order_item.item.id%}"><i class="fas fa-plus-square"></i></a></td>
+        <td>
+            {%if order_item.item.discountprice%}
+            {{order_item.get_discount_price}}
+            <span class="badge badge-primary">(Saving Rs.{{order_item.get_save|floatformat:2}})</span>
+            {%else%}
+            {{order_item.get_total_item_price}}
+            {%endif%}
+        </td>
+          <td><a href="{%url "app:delete" order_item.item.id%}"><i class="fas fa-trash"></i></a></td>
+      </tr>
+
+    {%endfor%}
+        <tr>
+            <td style="font-size:15px"><b>Order Total</b></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        <td style="font-size:15px"><b>Rs.{{order.total}}</b></td>
+    </tr>
+    <hr/>
+    <tr>
+        <td colspan="7">
+            <a class="btn btn-warning float-center mr-2" href="{%url 'app:item_list'%}" >Continue Shopping</a>
+
+            <a class="btn btn-primary float-center" href="{%url 'app:checkout'%}" >Proceed to Checkout</a>
+        </td>
+    </tr>
+    </tbody>
+  </table>
+{%endif%}
+</div>
+
+
+
+        </div>
+        <!--Grid row-->
+
+      </section>
+      <!--Section: Products v.3-->
+
+      <!--Pagination-->
+
+
+    </div>
+  </main>
+  <!--Main layout-->
+
+{%endblock%}
